@@ -4,91 +4,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskify</title>
+    <title>Taskify | Omar Rana</title>
 </head>
 
 <body>
-    <header>
-        <div>
-            <h1>Taskify</h1>
-        </div>
+    <header class="headerContainer">
+        <h1 class="appName">Taskify</h1>
     </header>
-    <aside>
-        <div>
-            <div>
-                <h3>Home</h3>
-                <ul>
-                    <li>All Tasls</li>
-                    <li>Today</li>
-                    <li>This Week</li>
-                    <li>This Month</li>
-                    <li>Important</li>
-                    <li>Completed</li>
+    <div class="topContainer">
+        <aside id="leftAsideBar">
+            <div class="menuContainer">
+                <h2>Home</h2>
+                <ul class="homeListContainer">
+                    <li class="homeFeatures" id="allTasks">All Tasls</li>
+                    <li class="homeFeatures" id="todayTasks">Today</li>
+                    <li class="homeFeatures" id="WeeklyTasks">This Week</li>
+                    <li class="homeFeatures" id="monthlyTasks">This Month</li>
+                    <li class="homeFeatures" id="importantTasks">Important</li>
+                    <li class="homeFeatures" id="conmpletedTasks">Completed</li>
                 </ul>
             </div>
-            <div>
-                <h3>Projects</h3>
-                <ul>
-                    <li>Projects</li>
-                    <li>JavaScript</li>
-                    <li>Gym Fitness</li>
-                    <li>New Learning Stuf</li>
+            <div class="menuContainer">
+                <div class="projectNameContainer">
+                    <h2>Projects</h2>
+                    <p id="projectAddBtn">⊕</p>
+                </div>
+                <ul class="projectsListContainer">
+                    <li>Javascript</li>
                 </ul>
             </div>
-        </div>
-    </aside>
-    <main>
-        <section class="ContentHeaderSection">
-            <h2>All Tasks</h2>
-            <p>Tasks (<span>23</span>)</p>
-        </section>
-        <section class="tasksSectionContainer">
-            <div class="taskContainer">
-                <input type="checkbox" name="" id="">
-                <div class="taskNameDiscriptionContainer">
-                    <p class="taskHeader">Clean Code</p>
-                    <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
+            <dialog id="projectNameGetterForm">
+                <form method="dialog">
+                    <div class="input-box project_input_field">
+                        <label for="projectTitle">Project Title:</label>
+                        <input id="projectTitle" type="text" placeholder="Title" required>
+                    </div>
+                    <div class="buttons">
+                        <button class="button" id="close" formnovalidate>Cancel</button>
+                        <button class="button" id="submitProject" type="submit">Confirm</button>
+                    </div>
+                </form>
+            </dialog>
+        </aside>
+
+        <main id="mainTasksContainer_Top">
+            <div class="mianTasksContainer_Lower">
+                <div>
+                    <h1 class="tasksHeader">All Tasks</h1>
                 </div>
-                <p class="taskDate">04-06-2023</p>
-                <p class="taskEdit">Edit</p>
-                <p class="taskWannaDelete">Delete</p>
-                <p class="isTaskImportant">IMP</p>
-            </div>
-            <div class="taskContainer">
-                <input type="checkbox" name="" id="">
-                <div class="taskNameDiscriptionContainer">
-                    <p class="taskHeader">Clean Code</p>
-                    <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
+                <div class="taskCountContainer">
+                    <div>Tasks "<span id="taskCount">8</span>"</div>
                 </div>
-                <p class="taskDate">04-06-2023</p>
-                <p class="taskEdit">Edit</p>
-                <p class="taskWannaDelete">Delete</p>
-                <p class="isTaskImportant">IMP</p>
-            </div>
-            <div class="taskContainer">
-                <input type="checkbox" name="" id="">
-                <div class="taskNameDiscriptionContainer">
-                    <p class="taskHeader">Clean Code</p>
-                    <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
+                <section class="tasksListContainer">
+                    <div class="taskContainer">
+                        <div class="task-left-side">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" name="" id="">
+                            </div>
+                            <div class="taskNameDescriptionContainer">
+                                <p class="taskHeader">Clean Code</p>
+                                <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
+                            </div>
+                        </div>
+                        <div class="task-right-side">
+                            <p class="taskDate">04-06-2023</p>
+                            <p class="taskEdit"></p>
+                            <p class="taskWannaDelete"></p>
+                            <p class="isTaskImportant"></p>
+
+                        </div>
+                    </div>
+                    <div class="taskContainer">
+                        <div class="task-left-side">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" name="checkbox" id="checkbox">
+                            </div>
+                            <div class="taskNameDiscriptionContainer">
+                                <p class="taskHeader">Clean Code</p>
+                                <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
+                            </div>
+                        </div>
+                        <div class="task-right-side">
+                            <p class="taskDate">04-06-2023</p>
+                            <p class="taskEdit"></p>
+                            <p class="taskWannaDelete"></p>
+                            <p class="isTaskImportant"></p>
+                        </div>
+                    </div>
+                </section>
+                <div id="taskBtnContainer">
+                    <button id="taskAddBtn" class="button">Add Task</button>
                 </div>
-                <p class="taskDate">04-06-2023</p>
-                <p class="taskEdit">Edit</p>
-                <p class="taskWannaDelete">Delete</p>
-                <p class="isTaskImportant">IMP</p>
             </div>
-            <div class="taskContainer">
-                <input type="checkbox" name="" id="">
-                <div class="taskNameDiscriptionContainer">
-                    <p class="taskHeader">Clean Code</p>
-                    <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
-                </div>
-                <p class="taskDate">04-06-2023</p>
-                <p class="taskEdit">Edit</p>
-                <p class="taskWannaDelete">Delete</p>
-                <p class="isTaskImportant">IMP</p>
-            </div>
-        </section>
-    </main>
+
+            <!-- Form getting info for task -->
+            <dialog id="taskInfoGetterForm">
+                <form method="dialog">
+                    <div class="input-box">
+                        <input id="taskTitle" type="text" placeholder="Title" required>
+                    </div>
+                    <div class="input-box">
+                        <input id="taskDiscription" type="text" placeholder="Discription">
+                    </div>
+                    <!-- <div class="input-box">
+                        <label for="projectList">Choose a Project:</label>
+                        <select name="projectList" id="projectList projectListSelectInput"></select>
+                    </div> -->
+                    <div class="input-box">
+                        <input type="date" id="taskDueDate">
+                    </div>
+                    <div class="input-box checkBox-feild">
+                        <input type="checkbox" id="taskCheckBox">
+                        <label for="taskCheckBox">Is Task Important?</label>
+                    </div>
+                    <div class="buttons">
+                        <button class="button" id="close" formnovalidate>Cancel</button>
+                        <button class="button" id="submitTask" type="submit">Confirm</button>
+                    </div>
+                </form>
+            </dialog>
+        </main>
+    </div>
 </body>
 
 </html>

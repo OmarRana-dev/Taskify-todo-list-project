@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  mode: "production",
   entry: {
     index: "./src/index.js",
   },
@@ -10,14 +11,15 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  divtool: "inline-source-map",
+  // divtool: "inline-source-map",
   devServer: {
     static: "./dist",
+    open: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Taskify | Omar Rana",
-      favicon: "./src/assets/icon.something.svg",
+      favicon: "./src/assets/icon/favicon.png",
+      template: "./src/index.html",
     }),
   ],
   module: {
@@ -32,7 +34,12 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: "svg-inline-loader",
+        loader: "svg-inline-loader",
+      },
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
       },
     ],
   },

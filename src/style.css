@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
+:root {
+  --menu-padding: 0.4rem 0.4rem 0.4rem 2.8rem;
+  --menu-images-position: 10px;
+  --menu-icons-bgsize: 20px;
+
+  --header-bg-color: #00a19d;
+  --Black: #25272c;
+  --Black-75: #25272cbf;
+  --Black-50: #25272c80;
+  --Black-25: #25272c40;
+  --Black-10: #25272c1a;
+  --hover-over-bg-color: #eeeeee;
+  --White: #fafafa;
+}
+
+/* Section Header Style */
+.headerContainer {
+  height: 4rem;
+  background-color: var(--header-bg-color);
+  display: flex;
+  align-items: center;
+  padding-left: 2.4rem;
+}
+
+.headerContainer > .appName {
+  color: white;
+}
+
+/* Section Top Container style */
+.topContainer {
+  display: grid;
+  grid-template: 1fr / 15rem 1fr;
+}
+
+/* Section aside Bar Style */
+.menuContainer {
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+.projectNameContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.projectNameContainer > p {
+  font-size: 1.5rem;
+  color: var(--Black-50);
+  cursor: pointer;
+  padding: 0 0.3rem;
+  border: 1px solid var(--Black-25);
+  border-radius: 0.3rem;
+}
+
+.projectNameContainer > p:active {
+  background-color: var(--hover-over-bg-color);
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+ul {
+  margin-top: 1.3rem;
+}
+
+li {
+  background-repeat: no-repeat;
+  background-position: var(--menu-images-position);
+  background-size: var(--menu-icons-bgsize);
+  padding: var(--menu-padding);
+  border-radius: 0.3rem;
+  list-style: none;
+  margin-top: 0.8rem;
+  color: var(--Black-75);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+#allTasks {
+  background-image: url(./assets/icons/all-task.png);
+}
+#todayTasks {
+  background-image: url(./assets/icons/today-task.png);
+}
+#WeeklyTasks {
+  background-image: url(./assets/icons/week-task.png);
+}
+#monthlyTasks {
+  background-image: url(./assets/icons/month-task.png);
+}
+#importantTasks {
+  background-image: url(./assets/icons/important-task.png);
+}
+#conmpletedTasks {
+  background-image: url(./assets/icons/completed-task.png);
+}
+
+li:hover {
+  background-color: var(--hover-over-bg-color);
+  cursor: pointer;
+}
+
+.projectsListContainer > li {
+  background-image: url(./assets/icons/projects.png);
+}
+
+/* mian container style Under The Tasks */
+#mainTasksContainer_Top {
+  display: flex;
+  justify-content: center;
+}
+
+/* Inner contaienr task section  */
+.mianTasksContainer_Lower {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.mianTasksContainer_Lower > div {
+  color: var(--Black-75);
+}
+
+/* Task Lists container style */
+.tasksListContainer {
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.taskContainer {
+  min-height: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid #dfdfdf;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  color: var(--Black-75);
+}
+
+.taskContainer:hover {
+  background-color: var(--hover-over-bg-color);
+}
+
+/* task list inner side style */
+.task-right-side,
+.task-left-side {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+/* right side task box style */
+.taskWannaDelete {
+  background-image: url(./assets/icons/delete-task.png);
+}
+.taskEdit {
+  background-image: url(./assets/icons/edit-task.png);
+}
+.isTaskImportant {
+  background-image: url(./assets/icons/isImportantTask-flag.png);
+}
+.yesImportantTask {
+  background-image: url(./assets/icons/importantTask-flag.png);
+}
+
+.taskEdit,
+.taskWannaDelete,
+.isTaskImportant,
+.yesImportantTask {
+  height: 2em;
+  min-width: 1.6em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: var(--menu-icons-bgsize);
+  cursor: pointer;
+}
+
+/* task box left side style */
+.taskNameDescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.taskDiscription {
+  color: var(--Black-50);
+  font-size: 0.85rem;
+}
+
+/* button style */
+.button {
+  background-color: var(--White);
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  color: var(--Black-75);
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 6px 16px;
+}
+
+.button:active {
+  background-color: var(--hover-over-bg-color);
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+/* Form Styling */
+dialog:modal {
+  overlay: auto !important;
+}
+
+dialog[open] {
+  display: block;
+}
+
+dialog {
+  margin: auto;
+  border: none;
+  padding: 2em;
+  border-radius: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input {
+  padding: 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 0.8rem;
+}
+
+input {
+  color: var(--Black-75);
+}
+input:focus {
+  background-color: var(--hover-over-bg-color);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--Black-75);
+}
+
+.project_input_field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.project_input_field > label {
+  position: relative;
+  left: 1rem;
+  font-size: 1.25rem;
+  color: var(--Black-75);
+}
+
+.checkBox-feild {
+  color: var(--Black-75);
+  display: flex;
+  justify-content: start;
+  gap: 1rem;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 1rem;
+}
+
+/* #taskBtnContainer {
+  display: none;
+} */
