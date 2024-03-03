@@ -1,6 +1,21 @@
+function creatTask(
+  title,
+  description,
+  dueDate,
+  isImportant,
+  isCompleted = false
+) {
+  return {
+    title,
+    description,
+    dueDate,
+    isImportant,
+    isCompleted,
+  };
+}
+
 class Task {
   constructor(name, description, dueDate, priority, isComplete = false) {
-    // this.id = id;
     this.name = name;
     this.description = description;
     this.dueDate = dueDate;
@@ -20,4 +35,4 @@ class Task {
   }
 }
 
-export { Task };
+export { Task, creatTask };

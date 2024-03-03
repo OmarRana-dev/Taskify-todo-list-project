@@ -53,19 +53,16 @@
   align-items: center;
 }
 
-.projectNameContainer > p {
-  font-size: 1.5rem;
-  color: var(--Black-50);
-  cursor: pointer;
-  padding: 0 0.3rem;
-  border: 1px solid var(--Black-25);
-  border-radius: 0.3rem;
+#projectAddBtn {
+  height: 30px;
+  width: 30px;
+  background-image: url(./assets/icons/add-event.png);
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
-.projectNameContainer > p:active {
-  background-color: var(--hover-over-bg-color);
-  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
-  transition: none 0s;
+#projectAddBtn:active {
+  background-image: url(./assets/icons/add-event1.png);
 }
 
 ul {
@@ -86,7 +83,7 @@ li {
 }
 
 #allTasks {
-  background-image: url(./assets/icons/all-task.png);
+  background-image: url(./assets/icons/bucket-list.png);
 }
 #todayTasks {
   background-image: url(./assets/icons/today-task.png);
@@ -95,7 +92,7 @@ li {
   background-image: url(./assets/icons/week-task.png);
 }
 #monthlyTasks {
-  background-image: url(./assets/icons/month-task.png);
+  background-image: url(./assets/icons/all-task.png);
 }
 #importantTasks {
   background-image: url(./assets/icons/important-task.png);
@@ -168,8 +165,14 @@ li:hover {
 .taskWannaDelete {
   background-image: url(./assets/icons/delete-task.png);
 }
+.taskWannaDelete:active {
+  background-image: url(./assets/icons/delete2.01.png);
+}
 .taskEdit {
-  background-image: url(./assets/icons/edit-task.png);
+  background-image: url(./assets/icons/file-edit1.png);
+}
+.taskEdit:active {
+  background-image: url(./assets/icons/file-edit2.png);
 }
 .isTaskImportant {
   background-image: url(./assets/icons/isImportantTask-flag.png);
@@ -293,6 +296,6 @@ input:focus {
   gap: 1rem;
 }
 
-/* #taskBtnContainer {
+#taskBtnContainer {
   display: none;
-} */
+}

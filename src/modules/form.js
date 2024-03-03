@@ -1,5 +1,14 @@
 import { addProject_UI, addTask_UI } from "./UI.js";
-import { Task } from "./task.js";
+import { Task, creatTask } from "./task.js";
+import { Project, createProject } from "./project.js";
+import {
+  getActiveProject,
+  showAddTaskBtn,
+  defaultProjects,
+  UpdateUI,
+  addGetActive,
+  appendTaskToParent,
+} from "./backend.js";
 
 // project name getter form script
 function openDialog_p() {
@@ -21,9 +30,14 @@ function projectNameGetter() {
 
 function addProjectToUIIfValid(name) {
   if (!name) {
-    console.log("Put Title");
+    console.log("Give a Name to Project.");
   } else {
-    addProject_UI(name);
+    const project = createProject(name);
+    console.log(project);
+    defaultProjects.push(project);
+    console.log(defaultProjects);
+    UpdateUI();
+    addGetActive();
   }
 }
 
@@ -60,8 +74,16 @@ function addTaskToUIIfValid(title, description, dueDate, isImportant) {
     console.log("title needed");
     return;
   } else {
-    const task = new Task(title, description, dueDate, isImportant);
-    addTask_UI(task);
+    const task = creatTask(title, description, dueDate, isImportant);
+    // console.log(task);
+    const activeProject = document.querySelector(".activeProject");
+    const projectID = activeProject.id;
+    const projectName = activeProject.innerHTML;
+    // console.log(projectName);
+
+    appendTaskToParent(projectID, projectName, task);
+    UpdateUI();
+    console.log(defaultProjects);
   }
 }
 

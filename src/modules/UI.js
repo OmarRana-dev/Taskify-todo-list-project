@@ -1,15 +1,13 @@
-function addProject_UI(project) {
+function addProject_UI(name, id) {
   const element = document.createElement("li");
-  element.textContent = `${project}`;
-  element.classList = "pro_Btn";
+  element.textContent = `${name}`;
+  element.setAttribute("id", `${id}`);
 
   const pro_Container = document.querySelector(".projectsListContainer");
   pro_Container.appendChild(element);
 }
 
 function addTask_UI(task) {
-  console.log("hello Task is runing");
-  console.log(task);
   const upperDiv = document.createElement("div");
   upperDiv.classList = "taskContainer";
 
@@ -29,6 +27,11 @@ function addTask_UI(task) {
 
   const checkBoxInput = document.createElement("input");
   checkBoxInput.setAttribute("type", "checkbox");
+  if (task.isCompleted) {
+    checkBoxInput.checked = true;
+  } else {
+    checkBoxInput.checked = false;
+  }
 
   checkBoxWrapper.appendChild(checkBoxInput);
 
@@ -37,7 +40,7 @@ function addTask_UI(task) {
 
   const taskHeader = document.createElement("p");
   taskHeader.classList = "taskHeader";
-  taskHeader.textContent = task.name;
+  taskHeader.textContent = task.title;
 
   const taskDescription = document.createElement("p");
   taskDescription.classList = "taskDiscription";
@@ -57,15 +60,13 @@ function addTask_UI(task) {
   taskDelete.classList = "taskWannaDelete";
 
   const taskImp = document.createElement("p");
-  if (task.priority) {
+  if (task.isImportant) {
     taskImp.classList = "yesImportantTask";
   } else {
     taskImp.classList = "isTaskImportant";
   }
 
   taskRightSide.append(taskDate, taskEdit, taskDelete, taskImp);
-
-  console.log("hello Task is runing by the end. ");
 }
 
 export { addProject_UI, addTask_UI };
