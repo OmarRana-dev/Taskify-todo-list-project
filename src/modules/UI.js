@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+import { addActiveClsToTaskForEdit } from "./taskEditor.js";
+
 function addProject_UI(name, id) {
   const element = document.createElement("li");
   element.textContent = `${name}`;
@@ -10,6 +13,7 @@ function addProject_UI(name, id) {
 function addTask_UI(task) {
   const upperDiv = document.createElement("div");
   upperDiv.classList = "taskContainer";
+  upperDiv.setAttribute("id", `${task.id}`);
 
   const taskListContaine = document.querySelector(".tasksListContainer");
   taskListContaine.appendChild(upperDiv);
@@ -51,7 +55,8 @@ function addTask_UI(task) {
 
   const taskDate = document.createElement("p");
   taskDate.classList = "taskDate";
-  taskDate.textContent = task.dueDate;
+  const dueDate = format(task.dueDate, "eee-d-MMM-yyyy");
+  taskDate.textContent = dueDate;
 
   const taskEdit = document.createElement("p");
   taskEdit.classList = "taskEdit";
@@ -69,4 +74,26 @@ function addTask_UI(task) {
   taskRightSide.append(taskDate, taskEdit, taskDelete, taskImp);
 }
 
-export { addProject_UI, addTask_UI };
+function UpdateImportance(isImportant) {
+  console.log(isImportant + " line 78");
+  console.log("also enter here line80");
+  const taskImp = document.createElement("p");
+  if (isImportant) {
+    taskImp.classList = "yesImportantTask";
+    taskImp.setAttribute("id", "activeToToggle");
+  } else {
+    taskImp.classList = "isTaskImportant";
+    taskImp.setAttribute("id", "activeToToggle");
+  }
+
+  const element = document.querySelector("#activeToToggle");
+  const taskRightSide = element.parentElement;
+  taskRightSide.removeChild(taskRightSide.lastElementChild);
+  console.log(taskRightSide);
+
+  taskRightSide.appendChild(taskImp);
+
+  // addActiveClsToTaskForEdit();
+}
+
+export { addProject_UI, addTask_UI, UpdateImportance };

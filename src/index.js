@@ -1,12 +1,44 @@
 import "./style.css";
-import { Task } from "./modules/task.js";
-import { Project } from "./modules/project.js";
-import { addProject_UI, addTask_UI } from "./modules/UI.js";
 import { openDialog_p, openDialog_t } from "./modules/form.js";
-import { showAddTaskBtn, UpdateUI, addGetActive } from "./modules/backend.js";
+import {
+  // defaultProjects,
+  ensureLocalStorage,
+  // addActiveClsToSelectedProject,
+} from "./modules/backend.js";
+import {
+  showAllTask,
+  showThisWeeksTask,
+  showThisMonthsTask,
+  showTodaysTask,
+  showImpotantTask,
+  showCompletedTask,
+} from "./modules/homeFeaturesFun.js";
+import { addActiveClsToTaskForEdit } from "./modules/taskEditor.js";
 
-UpdateUI();
-addGetActive();
+ensureLocalStorage();
+showAllTask();
+// addActiveClsToSelectedProject();
+
+// const taskBtnContainer = document.querySelector("#taskBtnContainer");
+// taskBtnContainer.setAttribute("style", "display: block;");
+
+const allTask = document.querySelector("#allTasks");
+allTask.addEventListener("click", showAllTask);
+
+const todaysTasks = document.querySelector("#todayTasks");
+todaysTasks.addEventListener("click", showTodaysTask);
+
+const thisMonth = document.querySelector("#monthlyTasks");
+thisMonth.addEventListener("click", showThisMonthsTask);
+
+const thisWeek = document.querySelector("#WeeklyTasks");
+thisWeek.addEventListener("click", showThisWeeksTask);
+
+const ImportantTask = document.querySelector("#importantTasks");
+ImportantTask.addEventListener("click", showImpotantTask);
+
+const completedTask = document.querySelector("#completedTasks");
+completedTask.addEventListener("click", showCompletedTask);
 
 const openDialogBtn_p = document.querySelector("#projectAddBtn");
 openDialogBtn_p.addEventListener("click", openDialog_p);

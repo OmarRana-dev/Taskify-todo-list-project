@@ -1,4 +1,4 @@
-import { defaultProjects } from "./backend.js";
+import { getToLoclStorage } from "./localStorage.js";
 
 function createProject(projectName) {
   return {
@@ -7,49 +7,16 @@ function createProject(projectName) {
     todos: [],
   };
 }
-class Project {
-  constructor(name) {
-    this.id = 7;
-    this.name = name;
-    this.todos = [];
-
-    return this;
-  }
-
-  addTask(task) {
-    this.todos.push(task);
-  }
-}
-
-// class Project {
-//   constructor(name) {
-//     this.id = generateID();
-//     this.name = name;
-//     this.todos = [];
-
-//     return this;
-//   }
-
-//   removeTask(taskName) {
-//     this.todos = this.todos.filter((task) => {
-//       return task.name !== taskName;
-//     });
-//   }
-
-//   getTasksByMonth(curentMonth) {}
-
-//   getCompletedTasks() {}
-
-//   getWeeklyTasks() {}
-// }
 
 function generateID() {
   let id = 0;
-  defaultProjects.forEach((project) => {
-    id = project.id;
+  const dataHolder = getToLoclStorage();
+  dataHolder.forEach((project) => {
+    id++;
   });
   id += 1;
-  return id;
+  let generatedID = `P${id}`;
+  return generatedID;
 }
 
-export { Project, createProject };
+export { createProject };

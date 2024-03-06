@@ -1,14 +1,16 @@
 import { addProject_UI, addTask_UI } from "./UI.js";
-import { Task, creatTask } from "./task.js";
-import { Project, createProject } from "./project.js";
+import { creatTask, editTask } from "./task.js";
+import { createProject } from "./project.js";
 import {
-  getActiveProject,
-  showAddTaskBtn,
-  defaultProjects,
-  UpdateUI,
-  addGetActive,
+  // addActiveClsToSelectedProject,
   appendTaskToParent,
+  addActiveClsToNewlyAddedProject,
+  addEditedTaskAtStorage,
+  getTaskWithIDforEdit,
+  UpdateUI,
 } from "./backend.js";
+import { addToLocalStorage, getToLoclStorage } from "./localStorage.js";
+import { addActiveClsToTaskForEdit } from "./taskEditor.js";
 
 // project name getter form script
 function openDialog_p() {
@@ -17,7 +19,6 @@ function openDialog_p() {
   const dialog = document.querySelector("#projectNameGetterForm");
   dialog.showModal();
 }
-
 const submitProject = document.querySelector("#submitProject");
 submitProject.addEventListener("click", projectNameGetter);
 
@@ -33,11 +34,15 @@ function addProjectToUIIfValid(name) {
     console.log("Give a Name to Project.");
   } else {
     const project = createProject(name);
-    console.log(project);
-    defaultProjects.push(project);
-    console.log(defaultProjects);
-    UpdateUI();
-    addGetActive();
+
+    const dataHolder = getToLoclStorage();
+    dataHolder.push(project);
+    addToLocalStorage(dataHolder);
+
+    console.log(getToLoclStorage());
+    // UpdateUI()
+    addProject_UI(project.projectName, project.id);
+    addActiveClsToNewlyAddedProject(project.id);
   }
 }
 
@@ -45,6 +50,7 @@ function addProjectToUIIfValid(name) {
 function openDialog_t() {
   clearForm();
 
+  console.log("open Dialog");
   const dialog = document.querySelector("#taskInfoGetterForm");
   dialog.showModal();
 }
@@ -60,12 +66,13 @@ const submitTaskBtn = document.querySelector("#submitTask");
 submitTaskBtn.addEventListener("click", taskInfoGetter);
 
 function taskInfoGetter() {
-  //   console.log("hi");
+  console.log("set the task new");
   const title = document.querySelector("#taskTitle").value.trim();
   const description = document.querySelector("#taskDiscription").value.trim();
-  const dueDate = document.querySelector("#taskDueDate").value.trim();
+  const dueDate = document.querySelector("#taskDueDate").value;
   const isImportant = document.querySelector("#taskCheckBox").checked;
 
+  console.log("at getter");
   addTaskToUIIfValid(title, description, dueDate, isImportant);
 }
 
@@ -74,17 +81,73 @@ function addTaskToUIIfValid(title, description, dueDate, isImportant) {
     console.log("title needed");
     return;
   } else {
-    const task = creatTask(title, description, dueDate, isImportant);
-    // console.log(task);
     const activeProject = document.querySelector(".activeProject");
     const projectID = activeProject.id;
     const projectName = activeProject.innerHTML;
-    // console.log(projectName);
+    const task = creatTask(projectID, title, description, dueDate, isImportant);
 
+    console.log("at task form adder");
+    addTask_UI(task);
     appendTaskToParent(projectID, projectName, task);
-    UpdateUI();
-    console.log(defaultProjects);
+
+    // addActiveClsToSelectedProject();
+    addActiveClsToTaskForEdit();
   }
 }
 
-export { openDialog_p, openDialog_t };
+// Update Task
+function updateTask() {
+  const dialog = document.querySelector("#taskEditorForm");
+  dialog.showModal();
+}
+console.log("Updated Task edit");
+const UpdateTask = document.querySelector("#taskUpdate");
+UpdateTask.addEventListener("click", getUpdatedInfoOfTask);
+
+function getUpdatedInfoOfTask() {
+  console.log("Updated Task edit");
+  const editedTask = document.querySelector("#editTaskTitle").value.trim();
+  const editedDescription = document
+    .querySelector("#editTaskDescription")
+    .value.trim();
+  const editedDueDate = document.querySelector("#editTaskDueDate").value.trim();
+
+  setUpdatedTaskInfo(editedTask, editedDescription, editedDueDate);
+}
+
+function setUpdatedTaskInfo(editedTask, editedDescription, editedDueDate) {
+  const activeTask = document.querySelector(".activeTask");
+
+  const taskData = getTaskWithIDforEdit(activeTask.id);
+
+  const title = editedTask || taskData.title;
+  const description = editedDescription || taskData.description;
+  const dueDate = editedDueDate || taskData.dueDate;
+
+  const updatedValues = editTask(title, description, dueDate);
+  console.log(updatedValues);
+
+  addEditedTaskAtStorage(activeTask.id, updatedValues);
+
+  appendUpdatedInfoAtUI(activeTask.id);
+}
+
+function appendUpdatedInfoAtUI(id) {
+  const updatedTask = getTaskWithIDforEdit(id);
+
+  const appendUpdatedHeaderAtUI = document.querySelector(
+    ".activeTask>.task-left-side>.taskNameDescriptionContainer>.taskHeader"
+  );
+  const appendUpdatedDescriptionAtUI = document.querySelector(
+    ".activeTask>.task-left-side>.taskNameDescriptionContainer>.taskDiscription"
+  );
+  const appendUpdatedDueDateAtUI = document.querySelector(
+    ".activeTask>.task-right-side>.taskDate"
+  );
+
+  appendUpdatedHeaderAtUI.textContent = updatedTask.title;
+  appendUpdatedDescriptionAtUI.textContent = updatedTask.description;
+  appendUpdatedDueDateAtUI.textContent = updatedTask.dueDate;
+}
+
+export { openDialog_p, openDialog_t, updateTask };

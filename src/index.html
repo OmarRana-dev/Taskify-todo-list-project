@@ -16,12 +16,12 @@
             <div class="menuContainer">
                 <h2>Home</h2>
                 <ul class="homeListContainer">
-                    <li class="homeFeatures" id="allTasks">All Tasls</li>
+                    <li class="homeFeatures" id="allTasks">All Tasks</li>
                     <li class="homeFeatures" id="todayTasks">Today</li>
                     <li class="homeFeatures" id="WeeklyTasks">This Week</li>
                     <li class="homeFeatures" id="monthlyTasks">This Month</li>
                     <li class="homeFeatures" id="importantTasks">Important</li>
-                    <li class="homeFeatures" id="conmpletedTasks">Completed</li>
+                    <li class="homeFeatures" id="completedTasks">Completed</li>
                 </ul>
             </div>
             <div class="menuContainer">
@@ -52,77 +52,55 @@
                     <h1 class="tasksHeader">All Tasks</h1>
                 </div>
                 <div class="taskCountContainer">
-                    <div>Tasks "<span id="taskCount">8</span>"</div>
+                    <div>Tasks "<span id="taskCount">0</span>"</div>
                 </div>
                 <section class="tasksListContainer">
-                    <!-- <div class="taskContainer">
-                        <div class="task-left-side">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" name="" id="">
-                            </div>
-                            <div class="taskNameDescriptionContainer">
-                                <p class="taskHeader">Clean Code</p>
-                                <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
-                            </div>
-                        </div>
-                        <div class="task-right-side">
-                            <p class="taskDate">04-06-2023</p>
-                            <p class="taskEdit"></p>
-                            <p class="taskWannaDelete"></p>
-                            <p class="isTaskImportant"></p>
 
-                        </div>
-                    </div>
-                    <div class="taskContainer">
-                        <div class="task-left-side">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox" name="checkbox" id="checkbox">
-                            </div>
-                            <div class="taskNameDiscriptionContainer">
-                                <p class="taskHeader">Clean Code</p>
-                                <p class="taskDiscription">related to how to write a clean and flexibal code.</p>
-                            </div>
-                        </div>
-                        <div class="task-right-side">
-                            <p class="taskDate">04-06-2023</p>
-                            <p class="taskEdit"></p>
-                            <p class="taskWannaDelete"></p>
-                            <p class="isTaskImportant"></p>
-                        </div>
-                    </div> -->
                 </section>
                 <div id="taskBtnContainer">
                     <button id="taskAddBtn" class="button">Add Task</button>
                 </div>
             </div>
 
-            <!-- Form getting info for task -->
-            <dialog id="taskInfoGetterForm">
-                <form method="dialog">
-                    <div class="input-box">
-                        <input id="taskTitle" type="text" placeholder="Title" required>
-                    </div>
-                    <div class="input-box">
-                        <input id="taskDiscription" type="text" placeholder="Discription">
-                    </div>
-                    <!-- <div class="input-box">
-                        <label for="projectList">Choose a Project:</label>
-                        <select name="projectList" id="projectList projectListSelectInput"></select>
-                    </div> -->
-                    <div class="input-box">
-                        <input type="date" id="taskDueDate">
-                    </div>
-                    <div class="input-box checkBox-feild">
-                        <input type="checkbox" id="taskCheckBox">
-                        <label for="taskCheckBox">Is Task Important?</label>
-                    </div>
-                    <div class="buttons">
-                        <button class="button" id="close" formnovalidate>Cancel</button>
-                        <button class="button" id="submitTask" type="submit">Confirm</button>
-                    </div>
-                </form>
-            </dialog>
         </main>
+        <dialog id="taskInfoGetterForm">
+            <form method="dialog">
+                <div class="input-box">
+                    <input id="taskTitle" type="text" placeholder="Title" required>
+                </div>
+                <div class="input-box">
+                    <input id="taskDiscription" type="text" placeholder="Discription">
+                </div>
+                <div class="input-box">
+                    <input type="date" id="taskDueDate">
+                </div>
+                <div class="input-box checkBox-feild">
+                    <input type="checkbox" id="taskCheckBox">
+                    <label for="taskCheckBox">Is Task Important?</label>
+                </div>
+                <div class="buttons">
+                    <button class="button" id="close" formnovalidate>Cancel</button>
+                    <button class="button" id="submitTask" type="submit">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="taskEditorForm">
+            <form method="dialog">
+                <div class="input-box">
+                    <input type="text" id="editTaskTitle" placeholder="Update Title">
+                </div>
+                <div class="input-box">
+                    <input type="text" id="editTaskDescription" placeholder="Update Description">
+                </div>
+                <div class="input-box">
+                    <input type="date" id="editTaskDueDate">
+                </div>
+                <div class="buttons">
+                    <button class="button" id="UpdateCancel">Cancel</button>
+                    <button class="button" id="taskUpdate" type="submit">Update</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 

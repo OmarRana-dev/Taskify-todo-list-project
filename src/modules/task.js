@@ -1,4 +1,7 @@
+import { getToLoclStorage } from "./localStorage.js";
+
 function creatTask(
+  projectID,
   title,
   description,
   dueDate,
@@ -6,6 +9,7 @@ function creatTask(
   isCompleted = false
 ) {
   return {
+    id: generateID(projectID),
     title,
     description,
     dueDate,
@@ -14,25 +18,28 @@ function creatTask(
   };
 }
 
-class Task {
-  constructor(name, description, dueDate, priority, isComplete = false) {
-    this.name = name;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.isComplete = isComplete;
-  }
-
-  taskComplete() {
-    this.isComplete = true;
-  }
-
-  editTask(name, newDescription, newDueDate, newPriority) {
-    this.name = name;
-    this.description = newDescription;
-    this.dueDate = newDueDate;
-    this.priority = newPriority;
-  }
+function editTask(title, description, dueDate) {
+  return {
+    title,
+    description,
+    dueDate,
+  };
 }
 
-export { Task, creatTask };
+function generateID(id) {
+  let taskID = 0;
+
+  const dataHolder = getToLoclStorage();
+  dataHolder.forEach((project) => {
+    if (project.id === id) {
+      project.todos.forEach(() => {
+        taskID++;
+      });
+    }
+  });
+  taskID++;
+  let generatedID = `${id}T${taskID}`;
+  return generatedID;
+}
+
+export { creatTask, editTask };
