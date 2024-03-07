@@ -31,14 +31,16 @@ function EditTask() {
   });
 }
 
+// toggle the importance of a task
 function toggleToUnImportant() {
   const toggletoUnImportant = document.querySelectorAll(".yesImportantTask");
   toggletoUnImportant.forEach((importanceBtn) => {
     importanceBtn.addEventListener("click", (e) => {
       e.stopPropagation();
+
       removePreviouslyActiveID();
+
       importanceBtn.setAttribute("id", "activeToToggle");
-      console.log(importanceBtn);
       toggleImpotance();
     });
   });
@@ -49,14 +51,16 @@ function toggleToImportant() {
   toggleToImportant.forEach((importanceBtn) => {
     importanceBtn.addEventListener("click", (e) => {
       e.stopPropagation();
+
       removePreviouslyActiveID();
+
       importanceBtn.setAttribute("id", "activeToToggle");
-      console.log(importanceBtn);
       toggleImpotance();
     });
   });
 }
 
+// remove Previously Active IDs
 function removePreviouslyActiveID() {
   const removeToggleClass = document.querySelector("#activeToToggle");
   if (removeToggleClass) {
@@ -67,22 +71,26 @@ function removePreviouslyActiveID() {
 function toggleImpotance() {
   const task = document.querySelector("#activeToToggle");
   const taskID = task.parentElement.parentElement.id;
-  console.log(taskID + "line 61");
+
   if (task.className === "yesImportantTask") {
     const UnImportant = { isImportant: false };
+
+    // update at storage
     addEditedTaskAtStorage(taskID, UnImportant);
 
+    // update on UI
     task.classList.remove("yesImportantTask");
     task.classList.add("isTaskImportant");
   } else if (task.className === "isTaskImportant") {
     const Important = { isImportant: true };
+
+    // update at Storage
     addEditedTaskAtStorage(taskID, Important);
 
+    // Update on UI
     task.classList.remove("isTaskImportant");
     task.classList.add("yesImportantTask");
   }
-
-  console.log(task.className);
 }
 
 function deleteTask() {
@@ -90,16 +98,18 @@ function deleteTask() {
   deleteTask.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
+
+      // remove previously added class for deleteTask
       deleteTask.forEach((deleteCls) => {
         deleteCls.parentElement.parentElement.classList.remove("yesDeleteIt");
       });
 
+      // adding a class to adentify whick class we want to delete
       btn.parentElement.parentElement.classList.add("yesDeleteIt");
 
       const taskContainer = document.querySelector(".yesDeleteIt");
-      console.log(taskContainer);
-      console.log(taskContainer.id);
       if (taskContainer.id) {
+        // pass this function reference at backend.js module where we delete this task from storage and update it
         deleteTaskFromStorage(taskContainer.id);
       }
     });
@@ -125,9 +135,7 @@ function toggleCompletedTaskAndAddToStorage() {
   const taskID =
     document.querySelector("#isCompleteActive").parentElement.parentElement
       .parentElement.id;
-  console.log(taskID);
   const isComplete = document.querySelector("#isCompleteActive").checked;
-  console.log(isComplete);
   if (isComplete) {
     const Completed = { isCompleted: true };
 
@@ -145,7 +153,7 @@ function toggleCompletedTaskAndAddToStorage() {
 
 function deleteProject() {
   const deleteProject = document.querySelectorAll(".projectDeleteSpan");
-  
+
   deleteProject.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
