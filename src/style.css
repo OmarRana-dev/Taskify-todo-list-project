@@ -108,6 +108,25 @@ li:hover {
 
 .projectsListContainer > li {
   background-image: url(./assets/icons/projects.png);
+  height: 2rem;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.projectDeleteSpan {
+  background-image: url(./assets/icons/cross.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: var(--menu-icons-bgsize);
+  cursor: pointer;
+  /* height: 2.5rem; */
+  height: 1.3rem;
+  width: 1.5rem;
+  position: absolute;
+  bottom: 10px;
+  right: 0.1px;
 }
 
 /* mian container style Under The Tasks */

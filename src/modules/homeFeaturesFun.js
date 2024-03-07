@@ -1,4 +1,4 @@
-import { UpdateUI, addActiveClsToSelectedProject } from "./backend.js";
+import { addActiveClsToSelectedProject } from "./backend.js";
 import { addProject_UI, addTask_UI } from "./UI.js";
 import {
   isSameDay,
@@ -27,6 +27,7 @@ function showAllTask() {
   });
 
   home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  addActiveClsToTaskForEdit();
   addActiveClsToSelectedProject();
 }
 
@@ -43,7 +44,7 @@ function showTodaysTask() {
         addTask_UI(task);
         tasks++;
       } else {
-        console.log("Does not match.");
+        // console.log("Does not match.");
         return;
       }
     });
@@ -66,7 +67,7 @@ function showThisMonthsTask() {
         addTask_UI(task);
         tasks++;
       } else {
-        console.log("Does not match.");
+        // console.log("Does not match.");
         return;
       }
     });
@@ -89,7 +90,7 @@ function showThisWeeksTask() {
         addTask_UI(task);
         tasks++;
       } else {
-        console.log("Does not match.");
+        // console.log("Does not match.");
         return;
       }
     });
@@ -110,7 +111,7 @@ function showImpotantTask() {
         addTask_UI(task);
         tasks++;
       } else {
-        console.log("Does not match.");
+        // console.log("Does not match.");
         return;
       }
     });
@@ -131,7 +132,7 @@ function showCompletedTask() {
         addTask_UI(task);
         tasks++;
       } else {
-        console.log("Does not match.");
+        // console.log("Does not match.");
         return;
       }
     });
@@ -142,7 +143,7 @@ function showCompletedTask() {
 }
 
 // after selecting project btn it will show his task only
-function getProjectTaskList(name) {
+function showProjectTaskList(name) {
   home_OR_Project_Features_Function_Holder.tasksHeaderUpdater(name);
 
   let tasks = 0;
@@ -157,7 +158,6 @@ function getProjectTaskList(name) {
   });
 
   home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
-  // addActiveClsToTaskForEdit();
 }
 
 const home_OR_Project_Features_Function_Holder = {
@@ -205,5 +205,5 @@ export {
   showTodaysTask,
   showImpotantTask,
   showCompletedTask,
-  getProjectTaskList,
+  showProjectTaskList,
 };

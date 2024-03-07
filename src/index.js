@@ -1,10 +1,6 @@
 import "./style.css";
 import { openDialog_p, openDialog_t } from "./modules/form.js";
-import {
-  // defaultProjects,
-  ensureLocalStorage,
-  // addActiveClsToSelectedProject,
-} from "./modules/backend.js";
+import { ensureLocalStorage } from "./modules/backend.js";
 import {
   showAllTask,
   showThisWeeksTask,
@@ -13,15 +9,12 @@ import {
   showImpotantTask,
   showCompletedTask,
 } from "./modules/homeFeaturesFun.js";
-import { addActiveClsToTaskForEdit } from "./modules/taskEditor.js";
 
+// from backend to ensure that browser have taken already data or not
 ensureLocalStorage();
 showAllTask();
-// addActiveClsToSelectedProject();
 
-// const taskBtnContainer = document.querySelector("#taskBtnContainer");
-// taskBtnContainer.setAttribute("style", "display: block;");
-
+// All Specific btns who are apper in home menu
 const allTask = document.querySelector("#allTasks");
 allTask.addEventListener("click", showAllTask);
 
@@ -40,6 +33,7 @@ ImportantTask.addEventListener("click", showImpotantTask);
 const completedTask = document.querySelector("#completedTasks");
 completedTask.addEventListener("click", showCompletedTask);
 
+// this btns for open form
 const openDialogBtn_p = document.querySelector("#projectAddBtn");
 openDialogBtn_p.addEventListener("click", openDialog_p);
 

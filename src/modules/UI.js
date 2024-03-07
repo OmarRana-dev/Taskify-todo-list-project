@@ -1,13 +1,17 @@
 import { format } from "date-fns";
-import { addActiveClsToTaskForEdit } from "./taskEditor.js";
 
 function addProject_UI(name, id) {
   const element = document.createElement("li");
-  element.textContent = `${name}`;
+  element.innerHTML = `${name}`;
   element.setAttribute("id", `${id}`);
+
+  const span = document.createElement("span");
+  span.classList = "projectDeleteSpan";
+  span.setAttribute("id", `spanBy_${id}`);
 
   const pro_Container = document.querySelector(".projectsListContainer");
   pro_Container.appendChild(element);
+  element.appendChild(span);
 }
 
 function addTask_UI(task) {
@@ -31,6 +35,7 @@ function addTask_UI(task) {
 
   const checkBoxInput = document.createElement("input");
   checkBoxInput.setAttribute("type", "checkbox");
+  checkBoxInput.classList = "isComplete";
   if (task.isCompleted) {
     checkBoxInput.checked = true;
   } else {
@@ -74,26 +79,4 @@ function addTask_UI(task) {
   taskRightSide.append(taskDate, taskEdit, taskDelete, taskImp);
 }
 
-function UpdateImportance(isImportant) {
-  console.log(isImportant + " line 78");
-  console.log("also enter here line80");
-  const taskImp = document.createElement("p");
-  if (isImportant) {
-    taskImp.classList = "yesImportantTask";
-    taskImp.setAttribute("id", "activeToToggle");
-  } else {
-    taskImp.classList = "isTaskImportant";
-    taskImp.setAttribute("id", "activeToToggle");
-  }
-
-  const element = document.querySelector("#activeToToggle");
-  const taskRightSide = element.parentElement;
-  taskRightSide.removeChild(taskRightSide.lastElementChild);
-  console.log(taskRightSide);
-
-  taskRightSide.appendChild(taskImp);
-
-  // addActiveClsToTaskForEdit();
-}
-
-export { addProject_UI, addTask_UI, UpdateImportance };
+export { addProject_UI, addTask_UI };

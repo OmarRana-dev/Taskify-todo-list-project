@@ -11,10 +11,11 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  // divtool: "inline-source-map",
+  // devtool: "inline-source-map",
   devServer: {
     static: "./dist",
     open: true,
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({

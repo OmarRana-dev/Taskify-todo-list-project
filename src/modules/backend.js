@@ -1,8 +1,6 @@
-// import { defaultProjects } from "../index.js";
-import { addTask_UI, addProject_UI } from "./UI.js";
-import { getProjectTaskList } from "./homeFeaturesFun.js";
+import { showProjectTaskList, showAllTask } from "./homeFeaturesFun.js";
 import { addToLocalStorage, getToLoclStorage } from "./localStorage.js";
-import { addActiveClsToTaskForEdit } from "./taskEditor.js";
+import { addActiveClsToTaskForEdit, deleteTask } from "./taskEditor.js";
 
 const defaultProjects = [
   {
@@ -78,6 +76,7 @@ const defaultProjects = [
   },
 ];
 
+// Function that just ensure browser have already taken data or not
 function ensureLocalStorage() {
   if (getToLoclStorage() === null) {
     console.log("add to storage");
@@ -85,57 +84,43 @@ function ensureLocalStorage() {
   }
 }
 
-function showAddTaskBtn() {
-  const taskBtnContainer = document.querySelector("#taskBtnContainer");
-  taskBtnContainer.setAttribute("style", "display: block;");
-}
-
+// when u click on specific project this function just will give you all of the tasks of this function or Project
 function addActiveClsToSelectedProject() {
   const projectList = document.querySelectorAll("ul.projectsListContainer>li");
   projectList.forEach((project) => {
-    project.addEventListener("click", () => {
+    project.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      // show you the specific project tasks on UI 
       const projectName = project.textContent;
-      getProjectTaskList(projectName);
+      showProjectTaskList(projectName);
 
       // Remove the "activeProject" class from any previously active project
       projectList.forEach((otherProject) => {
         otherProject.classList.remove("activeProject");
       });
 
-      console.log("done from selected project");
       // Add the "activeProject" class to the current clicked project
       project.classList.add("activeProject");
 
-      showAddTaskBtn();
+      // show the add task btn after selecting on project 
+      const taskBtnContainer = document.querySelector("#taskBtnContainer");
+      taskBtnContainer.setAttribute("style", "display: block;");
+
       addActiveClsToTaskForEdit();
     });
   });
-  addActiveClsToTaskForEdit();
 }
 
-function addActiveClsToNewlyAddedProject(id) {
-  addActive(id);
-  console.log("from auto Add");
-  const activeProject = document.querySelector(".activeProject");
-  const projectName = activeProject.innerHTML;
-  getProjectTaskList(projectName);
-
-  showAddTaskBtn();
-  addActiveClsToSelectedProject();
-  // addActiveClsToTaskForEdit();
+function showAddTaskBtn() {
+  const taskBtnContainer = document.querySelector("#taskBtnContainer");
+  taskBtnContainer.setAttribute("style", "display: block;");
 }
 
-function addActive(id) {
-  const projectList = document.querySelectorAll("ul.projectsListContainer>li");
-  const activeProject = Array.from(projectList).find((li) => li.id === `${id}`);
-
-  activeProject.classList.add("activeProject");
-}
 
 function appendTaskToParent(id, title, task) {
   const dataHolder = getToLoclStorage();
   console.log("enter");
-  // console.log(defaultProjects);
   console.log(dataHolder);
   const matchingProject = dataHolder.find(
     (project) => project.id === id || project.projectName === title
@@ -148,12 +133,11 @@ function appendTaskToParent(id, title, task) {
     console.error("Project with ID", id, "or title", title, "not found.");
   }
   addToLocalStorage(dataHolder);
-  console.log(getToLoclStorage());
-
-  console.log("Out");
 }
 
 function addEditedTaskAtStorage(taskId, updatedValues) {
+  console.log(taskId);
+  console.log(updatedValues);
   const dataHolder = getToLoclStorage();
   dataHolder.forEach((project) => {
     project.todos.forEach((task) => {
@@ -176,34 +160,53 @@ function getTaskWithIDforEdit(taskId) {
   return foundTask;
 }
 
-function UpdateUI() {
-  const projectList = document.querySelector(".projectsListContainer");
-  projectList.textContent = "";
-
-  const taskLists = document.querySelector(".tasksListContainer");
-  taskLists.textContent = "";
-
+function deleteProjectFromStorage(projectID) {
+  console.log(projectID);
   const dataHolder = getToLoclStorage();
-  dataHolder.forEach((project) => {
-    //   console.log(project);
-    addProject_UI(project.projectName, project.id);
-    project.todos.forEach((task) => {
-      // console.log(task);
-      addTask_UI(task);
-    });
+
+  dataHolder.forEach(() => {
+    const projectIndex = dataHolder.findIndex(
+      (project) => project.id === projectID
+    );
+
+    // console.log(projectIndex);
+    if (projectIndex !== -1) {
+      dataHolder.splice(projectIndex, 1);
+      console.log(`Project with ID ${projectID} deleted successfully.`);
+      addToLocalStorage(dataHolder);
+      console.log("done on backend 177");
+      showAllTask();
+      return;
+    }
   });
-  addActiveClsToSelectedProject();
-  addActiveClsToTaskForEdit();
+}
+
+// as this function name shows this will delete the task from storage and update it on UI
+function deleteTaskFromStorage(taskID) {
+  const dataHolder = getToLoclStorage();
+
+  dataHolder.forEach((project) => {
+    const taskIndex = project.todos.findIndex((todo) => todo.id === taskID);
+
+    if (taskIndex !== -1) {
+      console.log(taskIndex);
+      project.todos.splice(taskIndex, 1);
+      console.log(`Task with ID ${taskID} deleted successfully.`);
+      addToLocalStorage(dataHolder);
+      showAllTask();
+      return;
+    }
+  });
 }
 
 export {
   ensureLocalStorage,
   showAddTaskBtn,
   defaultProjects,
-  UpdateUI,
   addActiveClsToSelectedProject,
   appendTaskToParent,
-  addActiveClsToNewlyAddedProject,
   addEditedTaskAtStorage,
   getTaskWithIDforEdit,
+  deleteProjectFromStorage,
+  deleteTaskFromStorage,
 };
