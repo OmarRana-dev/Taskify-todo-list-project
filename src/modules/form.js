@@ -29,7 +29,7 @@ function projectNameGetter() {
 
 function addProjectToUIIfValid(name) {
   if (!name) {
-    // console.error('Give a Name to Project.');
+    console.error("Give a Name to Project.");
   } else {
     const project = createProject(name);
 
