@@ -6,7 +6,7 @@ This web application is a comprehensive todo list built using HTML, CSS, and Jav
 
 ## Features
 
-- Task Creation: Add new tasks with clear descriptions, due dates, and priority levels (e.g., high, medium, low).
+- Task Creation: Add new tasks with clear descriptions, due dates, and priority levels (e.g., high or low).
 - Task Viewing: View all tasks in a user-friendly list format, categorized by project.
 - Task Editing: Modify details of existing tasks, including descriptions, due dates, priorities, and project assignment.
 - Task Deletion: Remove completed or unwanted tasks.
