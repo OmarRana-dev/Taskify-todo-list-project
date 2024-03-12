@@ -1,6 +1,6 @@
-import { showProjectTaskList, showAllTask } from "./homeFeaturesFun.js";
-import { addToLocalStorage, getToLoclStorage } from "./localStorage.js";
-import { addActiveClsToTaskForEdit, deleteTask } from "./taskEditor.js";
+import { showProjectTaskList, showAllTask } from "./homeFeaturesFun";
+import { addToLocalStorage, getToLoclStorage } from "./localStorage";
+import { addActiveClsToTaskForEdit } from "./taskEditor";
 
 const defaultProjects = [
   {
@@ -79,7 +79,7 @@ const defaultProjects = [
 // Function that just ensure browser have already taken data or not
 function ensureLocalStorage() {
   if (getToLoclStorage() === null) {
-    console.log("add to storage");
+    // console.log("add to storage");
     addToLocalStorage(defaultProjects);
   }
 }
@@ -91,7 +91,7 @@ function addActiveClsToSelectedProject() {
     project.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      // show you the specific project tasks on UI 
+      // show you the specific project tasks on UI
       const projectName = project.textContent;
       showProjectTaskList(projectName);
 
@@ -103,7 +103,7 @@ function addActiveClsToSelectedProject() {
       // Add the "activeProject" class to the current clicked project
       project.classList.add("activeProject");
 
-      // show the add task btn after selecting on project 
+      // show the add task btn after selecting on project
       const taskBtnContainer = document.querySelector("#taskBtnContainer");
       taskBtnContainer.setAttribute("style", "display: block;");
 
@@ -117,27 +117,26 @@ function showAddTaskBtn() {
   taskBtnContainer.setAttribute("style", "display: block;");
 }
 
-
 function appendTaskToParent(id, title, task) {
   const dataHolder = getToLoclStorage();
-  console.log("enter");
-  console.log(dataHolder);
+  // console.log("enter");
+  // console.log(dataHolder);
   const matchingProject = dataHolder.find(
-    (project) => project.id === id || project.projectName === title
+    (project) => project.id === id || project.projectName === title,
   );
 
   if (matchingProject) {
     matchingProject.todos.push(task);
-    console.log("Task added to project:", matchingProject.projectName); // Log success
+    // console.log("Task added to project:", matchingProject.projectName); // Log success
   } else {
-    console.error("Project with ID", id, "or title", title, "not found.");
+    // console.error("Project with ID", id, "or title", title, "not found.");
   }
   addToLocalStorage(dataHolder);
 }
 
 function addEditedTaskAtStorage(taskId, updatedValues) {
-  console.log(taskId);
-  console.log(updatedValues);
+  // console.log(taskId);
+  // console.log(updatedValues);
   const dataHolder = getToLoclStorage();
   dataHolder.forEach((project) => {
     project.todos.forEach((task) => {
@@ -161,22 +160,22 @@ function getTaskWithIDforEdit(taskId) {
 }
 
 function deleteProjectFromStorage(projectID) {
-  console.log(projectID);
+  // console.log(projectID);
   const dataHolder = getToLoclStorage();
 
   dataHolder.forEach(() => {
     const projectIndex = dataHolder.findIndex(
-      (project) => project.id === projectID
+      (project) => project.id === projectID,
     );
 
     // console.log(projectIndex);
     if (projectIndex !== -1) {
       dataHolder.splice(projectIndex, 1);
-      console.log(`Project with ID ${projectID} deleted successfully.`);
+      // console.log(`Project with ID ${projectID} deleted successfully.`);
       addToLocalStorage(dataHolder);
-      console.log("done on backend 177");
+      // console.log("done on backend 177");
       showAllTask();
-      return;
+      // return;
     }
   });
 }
@@ -189,12 +188,11 @@ function deleteTaskFromStorage(taskID) {
     const taskIndex = project.todos.findIndex((todo) => todo.id === taskID);
 
     if (taskIndex !== -1) {
-      console.log(taskIndex);
+      // console.log(taskIndex);
       project.todos.splice(taskIndex, 1);
-      console.log(`Task with ID ${taskID} deleted successfully.`);
+      // console.log(`Task with ID ${taskID} deleted successfully.`);
       addToLocalStorage(dataHolder);
       showAllTask();
-      return;
     }
   });
 }

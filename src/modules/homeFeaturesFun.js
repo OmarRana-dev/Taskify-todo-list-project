@@ -1,5 +1,3 @@
-import { addActiveClsToSelectedProject } from "./backend.js";
-import { addProject_UI, addTask_UI } from "./UI.js";
 import {
   isSameDay,
   isSameMonth,
@@ -7,11 +5,13 @@ import {
   startOfWeek,
   endOfWeek,
 } from "date-fns";
-import { getToLoclStorage } from "./localStorage.js";
-import { addActiveClsToTaskForEdit } from "./taskEditor.js";
+import { addActiveClsToSelectedProject } from "./backend";
+import { addProjectToUI, addTaskToUI } from "./UI";
+import { getToLoclStorage } from "./localStorage";
+import { addActiveClsToTaskForEdit } from "./taskEditor";
 
 function showAllTask() {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater("All");
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater("All");
 
   const projectList = document.querySelector(".projectsListContainer");
   projectList.textContent = "";
@@ -19,20 +19,20 @@ function showAllTask() {
   let tasks = 0;
   const storage = getToLoclStorage();
   storage.forEach((project) => {
-    addProject_UI(project.projectName, project.id);
+    addProjectToUI(project.projectName, project.id);
     project.todos.forEach((task) => {
-      addTask_UI(task);
+      addTaskToUI(task);
       tasks++;
     });
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
   addActiveClsToTaskForEdit();
   addActiveClsToSelectedProject();
 }
 
 function showTodaysTask() {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater("Today's");
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater("Today's");
 
   let tasks = 0;
   const dataHolder = getToLoclStorage();
@@ -40,22 +40,22 @@ function showTodaysTask() {
     project.todos.forEach((task) => {
       const dueDate = new Date(task.dueDate);
 
-      if (home_OR_Project_Features_Function_Holder.isToday(dueDate)) {
-        addTask_UI(task);
+      if (homeORProjectFeaturesFunctionHolder.isToday(dueDate)) {
+        addTaskToUI(task);
         tasks++;
       } else {
         // console.log("Does not match.");
-        return;
+        // return;
       }
     });
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
   addActiveClsToTaskForEdit();
 }
 
 function showThisMonthsTask() {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater("This Month");
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater("This Month");
 
   let tasks = 0;
   const dataHolder = getToLoclStorage();
@@ -63,22 +63,22 @@ function showThisMonthsTask() {
     project.todos.forEach((task) => {
       const date = new Date(task.dueDate);
 
-      if (home_OR_Project_Features_Function_Holder.isInCurrentMonth(date)) {
-        addTask_UI(task);
+      if (homeORProjectFeaturesFunctionHolder.isInCurrentMonth(date)) {
+        addTaskToUI(task);
         tasks++;
       } else {
         // console.log("Does not match.");
-        return;
+        // return;
       }
     });
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
   addActiveClsToTaskForEdit();
 }
 
 function showThisWeeksTask() {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater("This Week");
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater("This Week");
 
   let tasks = 0;
   const dataHolder = getToLoclStorage();
@@ -86,81 +86,81 @@ function showThisWeeksTask() {
     project.todos.forEach((task) => {
       const date = new Date(task.dueDate);
 
-      if (home_OR_Project_Features_Function_Holder.isInCurrentWeek(date)) {
-        addTask_UI(task);
+      if (homeORProjectFeaturesFunctionHolder.isInCurrentWeek(date)) {
+        addTaskToUI(task);
         tasks++;
       } else {
         // console.log("Does not match.");
-        return;
+        // return;
       }
     });
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
   addActiveClsToTaskForEdit();
 }
 
 function showImpotantTask() {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater("Important");
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater("Important");
 
   let tasks = 0;
   const dataHolder = getToLoclStorage();
   dataHolder.forEach((project) => {
     project.todos.forEach((task) => {
       if (task.isImportant) {
-        addTask_UI(task);
+        addTaskToUI(task);
         tasks++;
       } else {
         // console.log("Does not match.");
-        return;
+        // return;
       }
     });
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
   addActiveClsToTaskForEdit();
 }
 
 function showCompletedTask() {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater("Completed");
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater("Completed");
 
   let tasks = 0;
   const dataHolder = getToLoclStorage();
   dataHolder.forEach((project) => {
     project.todos.forEach((task) => {
       if (task.isCompleted) {
-        addTask_UI(task);
+        addTaskToUI(task);
         tasks++;
       } else {
         // console.log("Does not match.");
-        return;
+        // return;
       }
     });
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
   addActiveClsToTaskForEdit();
 }
 
 // after selecting project btn it will show his task only
 function showProjectTaskList(name) {
-  home_OR_Project_Features_Function_Holder.tasksHeaderUpdater(name);
+  homeORProjectFeaturesFunctionHolder.tasksHeaderUpdater(name);
 
   let tasks = 0;
   const dataHolder = getToLoclStorage();
   dataHolder.forEach((project) => {
     if (project.projectName === name) {
       project.todos.forEach((task) => {
-        addTask_UI(task);
+        addTaskToUI(task);
         tasks++;
       });
     }
   });
 
-  home_OR_Project_Features_Function_Holder.tasksCounter(tasks);
+  homeORProjectFeaturesFunctionHolder.tasksCounter(tasks);
 }
 
-const home_OR_Project_Features_Function_Holder = {
+const homeORProjectFeaturesFunctionHolder = {
   isInCurrentMonth(date) {
     const currentMonth = new Date();
     return isSameMonth(date, currentMonth);

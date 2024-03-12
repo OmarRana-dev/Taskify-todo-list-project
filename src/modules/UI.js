@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-function addProject_UI(name, id) {
+function addProjectToUI(name, id) {
   const element = document.createElement("li");
   element.innerHTML = `${name}`;
   element.setAttribute("id", `${id}`);
@@ -9,12 +9,12 @@ function addProject_UI(name, id) {
   span.classList = "projectDeleteSpan";
   span.setAttribute("id", `spanBy_${id}`);
 
-  const pro_Container = document.querySelector(".projectsListContainer");
-  pro_Container.appendChild(element);
+  const projectContainer = document.querySelector(".projectsListContainer");
+  projectContainer.appendChild(element);
   element.appendChild(span);
 }
 
-function addTask_UI(task) {
+function addTaskToUI(task) {
   const upperDiv = document.createElement("div");
   upperDiv.classList = "taskContainer";
   upperDiv.setAttribute("id", `${task.id}`);
@@ -44,8 +44,8 @@ function addTask_UI(task) {
 
   checkBoxWrapper.appendChild(checkBoxInput);
 
-  const taskN_D = document.createElement("div");
-  taskN_D.classList = "taskNameDescriptionContainer";
+  const taskNameDescription = document.createElement("div");
+  taskNameDescription.classList = "taskNameDescriptionContainer";
 
   const taskHeader = document.createElement("p");
   taskHeader.classList = "taskHeader";
@@ -55,8 +55,8 @@ function addTask_UI(task) {
   taskDescription.classList = "taskDiscription";
   taskDescription.textContent = task.description;
 
-  taskN_D.append(taskHeader, taskDescription);
-  taskLeftSide.append(checkBoxWrapper, taskN_D);
+  taskNameDescription.append(taskHeader, taskDescription);
+  taskLeftSide.append(checkBoxWrapper, taskNameDescription);
 
   const taskDate = document.createElement("p");
   taskDate.classList = "taskDate";
@@ -79,4 +79,4 @@ function addTask_UI(task) {
   taskRightSide.append(taskDate, taskEdit, taskDelete, taskImp);
 }
 
-export { addProject_UI, addTask_UI };
+export { addProjectToUI, addTaskToUI };

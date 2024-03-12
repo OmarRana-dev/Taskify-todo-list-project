@@ -1,4 +1,4 @@
-import { getToLoclStorage } from "./localStorage.js";
+import { getToLoclStorage } from "./localStorage";
 
 function creatTask(
   projectID,
@@ -6,7 +6,7 @@ function creatTask(
   description,
   dueDate,
   isImportant,
-  isCompleted = false
+  isCompleted = false,
 ) {
   return {
     id: generateID(projectID),
@@ -38,7 +38,7 @@ function generateID(id) {
     }
   });
   taskID++;
-  let generatedID = `${id}T${taskID}`;
+  const generatedID = `${id}T${taskID}`;
   return generatedID;
 }
 

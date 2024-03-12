@@ -1,4 +1,4 @@
-import { getToLoclStorage } from "./localStorage.js";
+import { getToLoclStorage } from "./localStorage";
 
 function createProject(projectName) {
   return {
@@ -11,11 +11,11 @@ function createProject(projectName) {
 function generateID() {
   let id = 0;
   const dataHolder = getToLoclStorage();
-  dataHolder.forEach((project) => {
+  dataHolder.forEach(() => {
     id++;
   });
   id += 1;
-  let generatedID = `P${id}`;
+  const generatedID = `P${id}`;
   return generatedID;
 }
 

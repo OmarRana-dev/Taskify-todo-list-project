@@ -1,4 +1,4 @@
-import { defaultProjects } from "./backend.js";
+import { defaultProjects } from "./backend";
 
 const addToLocalStorage = (value) => {
   localStorage.setItem("projectsAndTasks", JSON.stringify(value));

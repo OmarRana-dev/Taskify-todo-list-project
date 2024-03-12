@@ -1,12 +1,12 @@
-import { updateTask } from "./form.js";
+import { updateTask } from "./form";
 import {
   deleteTaskFromStorage,
   addEditedTaskAtStorage,
   deleteProjectFromStorage,
-} from "./backend.js";
+} from "./backend";
 
 function addActiveClsToTaskForEdit() {
-  console.log("from editor");
+  // console.log("from editor");
 
   EditTask();
   toggleToUnImportant();
@@ -33,8 +33,8 @@ function EditTask() {
 
 // toggle the importance of a task
 function toggleToUnImportant() {
-  const toggletoUnImportant = document.querySelectorAll(".yesImportantTask");
-  toggletoUnImportant.forEach((importanceBtn) => {
+  const toggleFlage = document.querySelectorAll(".yesImportantTask");
+  toggleFlage.forEach((importanceBtn) => {
     importanceBtn.addEventListener("click", (e) => {
       e.stopPropagation();
 
@@ -47,8 +47,8 @@ function toggleToUnImportant() {
 }
 
 function toggleToImportant() {
-  const toggleToImportant = document.querySelectorAll(".isTaskImportant");
-  toggleToImportant.forEach((importanceBtn) => {
+  const toggleFlage = document.querySelectorAll(".isTaskImportant");
+  toggleFlage.forEach((importanceBtn) => {
     importanceBtn.addEventListener("click", (e) => {
       e.stopPropagation();
 
@@ -94,13 +94,13 @@ function toggleImpotance() {
 }
 
 function deleteTask() {
-  const deleteTask = document.querySelectorAll(".taskWannaDelete");
-  deleteTask.forEach((btn) => {
+  const taskDeleteElements = document.querySelectorAll(".taskWannaDelete");
+  taskDeleteElements.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      // remove previously added class for deleteTask
-      deleteTask.forEach((deleteCls) => {
+      // remove previously added class for taskDeleteElements
+      taskDeleteElements.forEach((deleteCls) => {
         deleteCls.parentElement.parentElement.classList.remove("yesDeleteIt");
       });
 
@@ -121,8 +121,8 @@ function isTaskComplete() {
   isComplete.forEach((input) => {
     input.addEventListener("click", (e) => {
       e.stopPropagation();
-      isComplete.forEach((input) => {
-        input.removeAttribute("id", "isCompleteActive");
+      isComplete.forEach((removeInputId) => {
+        removeInputId.removeAttribute("id", "isCompleteActive");
       });
 
       input.setAttribute("id", "isCompleteActive");
@@ -152,14 +152,11 @@ function toggleCompletedTaskAndAddToStorage() {
 }
 
 function deleteProject() {
-  const deleteProject = document.querySelectorAll(".projectDeleteSpan");
+  const deleteProjectBtn = document.querySelectorAll(".projectDeleteSpan");
 
-  deleteProject.forEach((btn) => {
+  deleteProjectBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      deleteProject.forEach((btn) => {
-        btn.parentElement.classList.remove("deleteProject");
-      });
 
       btn.parentElement.classList.add("deleteProject");
 
